@@ -54,6 +54,8 @@ app.use('/uploads/', fRoutes.fUpload)
 app.use('/try/', fRoutes.fTry)
 app.use('/create/', fRoutes.fCreate)
 
+// console.log
+
 // 404
 app.use((req, res, next) => {
     const err = new Error('Not Found')
