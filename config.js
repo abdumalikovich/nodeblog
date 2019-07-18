@@ -6,7 +6,7 @@ dotenv.config({ path: root('.env') });
 
 module.exports = {
     PORT: process.env.PORT,
-    MONGOURL: process.env.MONGOURL,
+    MONGOURL: 'mongodb+srv://deved:adwawdawd12@cluster0-ehy1j.mongodb.net/test?retryWrites=true&w=majority',
     IS_PRODUCTION: process.env.NODE_ENV === 'production',
     SESSION_SECRET: process.env.SESSION_SECRET,
     DESTINATION: process.env.UPLOAD_FOLDER

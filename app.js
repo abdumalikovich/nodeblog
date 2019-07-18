@@ -54,21 +54,21 @@ app.use('/uploads/', fRoutes.fUpload)
 app.use('/try/', fRoutes.fTry)
 app.use('/create/', fRoutes.fCreate)
 
-// // 404
-// app.use((req, res, next) => {
-//     const err = new Error('Not Found')
-//     err.static = 404
-//     next(err)
-// })
+// 404
+app.use((req, res, next) => {
+    const err = new Error('Not Found')
+    err.static = 404
+    next(err)
+})
 
-// // 500
-// app.use((error, req, res, next) => {
-//     res.status(error.status || 500)
-//     res.render('error', {
-//         message: error.message,
-//         error: !mConfig.IS_PRODUCTION ? error : {}
-//     })
-// })
+// 500
+app.use((error, req, res, next) => {
+    res.status(error.status || 500)
+    res.render('error', {
+        message: error.message,
+        error: !mConfig.IS_PRODUCTION ? error : {}
+    })
+})
 
 // listening
 app.listen(mConfig.PORT, () => {
