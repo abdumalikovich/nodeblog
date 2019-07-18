@@ -1,0 +1,98 @@
+<div class="success_sended">
+	<img width="24" src="/static/img/checked.svg"/>
+	<p>Success</p>
+</div>
+
+<% if(user.sessionId && user.sessionLogin) { %>
+	<nav user="true" class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Home</a>
+		<a class="btn_link" href="/author/<%= user.sessionLogin %>"><%= user.sessionLogin %></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto"></ul>
+			<div class="forms user_true">
+				<a href="/api/auth/logout">
+					<button class="btn_classic btn_classic_green btn_sign_in link_log_out" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Log out</button>
+				</a>
+				<a href="/post/create">
+					<button class="btn_link btn_post_now link_post" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Post now</button>
+				</a>
+				<a href="/post/drafts">
+					<button class="btn_link btn_show_drafts link_post" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">My drafts</button>
+				</a>
+			</div>
+		</div>
+	</nav>
+<% } else { %>
+	<nav user="false" class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto"></ul>
+			<div class="forms user_false">
+				<button class="btn_classic btn_classic_green btn_open_window btn_sign_in link_sign_in" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Sign In</button>
+				<button class="btn_classic btn_classic_green btn_open_window btn_register_now link_register" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Register now</button>
+				<a href="/try/images">
+					<button class="btn_link btn_show_drafts link_post" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Trybox</button>
+				</a>
+			</div>
+		</div>
+	</nav>
+	<div class="form_windows">
+		<div class="register form_window_popup link_register">
+			<form method="POST">
+				<h2 class="register_text">Register now</h2>
+				<div class="form-group">
+					<label for="post_image">Load avatar</label>
+					<input type="file" id="post_image" class="form-control input_image btn" name="post_image">
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="register_login">Login*</label>
+						<input name="register_login" type="text" class="form-control register_login" id="register_login" placeholder="Login">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="register_address">Address</label>
+						<input name="register_address" type="text" class="form-control register_address" id="register_address" placeholder="1234 Main St">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="register_password">Password*</label>
+						<input name="register_password" type="password" class="form-control register_password" id="register_password" placeholder="Password">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="register_password_confirm">Confirm password*</label>
+						<input name="register_password_confirm" type="password" class="form-control register_password_confirm" id="register_password_confirm" placeholder="Confirm password">
+					</div>
+				</div>
+				<button type="submit" class="btn_classic btn_send_data send_register_data">Register</button>
+			</form>
+		</div>
+
+		<div class="sign_in form_window_popup link_sign_in">
+			<form method="POST">
+				<h2 class="register_text">Sign In</h2>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="sign_in_login">Login*</label>
+						<input name="sign_in_login" type="text" class="form-control register_login" id="sign_in_login" placeholder="Login">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="sign_in_password">Password*</label>
+						<input name="sign_in_password" type="password" class="form-control register_password" id="sign_in_password" placeholder="Password">
+					</div>
+				</div>
+				<button type="submit" class="btn_classic btn_send_data send_sign_in_data">Sign in</button>
+			</form>
+		</div>
+	</div>
+<% }  %>
+
+

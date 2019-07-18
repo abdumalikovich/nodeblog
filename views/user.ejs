@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<body page="home">
+    <% include app/head %>
+    <% include app/header %>
+
+    <%
+        function trimMe(text, size) {
+            let trimmedString = text.substr(0, size)
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            return trimmedString
+        }
+    %>
+
+    <style>
+        nav.navbar {
+            box-shadow: 0 4px 12px 0 rgba(0,0,0,.15)!important;
+        }
+        nav.navbar, .container-fluid.container_author {
+            background-color: #6A0BFF!important;
+        }
+        nav.navbar .btn_classic_green, nav.navbar .btn_link, nav.navbar .navbar-brand {
+            color: #fff;
+            border-color: #fff;
+        }
+    </style>
+
+    <div class="container-fluid container_author">
+        <div class="container">
+            <div class="top">
+                <div class="left">
+                    <div class="name">
+                        <h1>
+                            <%
+                                let authorName = author
+                            %>
+                            <%= authorName.charAt(0).toUpperCase() + authorName.slice(1) %>
+                        </h1>
+                        <p>Journalist. Writer. Photographer. Human-er.</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="/static/img/authors/1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container_author">
+        <div class="posts">
+            <% for(let i = 0; i < post.length; i++) { %>
+                <div class="item">
+                    <div class="top" style="background-image: url(/static/img/articles/1.png);"></div>
+                    <div class="descr">
+                        <div>
+                            <a href="/article/<%= post[i].url %>">
+                                <p class="title"><%= post[i].post_title %></p>
+                            </a>
+                            <% if(post[i].post_author === user.sessionLogin) { %>
+                                <a href="/post/edit/<%= post[i].id %>">Edit article</a>
+                            <% } %>
+                        </div>
+                        <p class="text"><%= trimMe(post[i].post_body, 140) %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        <div class="pagination">
+                <% if(current > 1) { %>
+                    <a href="/author/<%= author %>/<%= Number(current) -1 %>">Back</a>
+                <% } %>
+                <% if(pages > 0 && current < pages) { %>
+                    <a href="/author/<%= author %>/<%= Number(current) + 1%>">Next</a>
+                <% } %>
+        </div>
+    </div>
+    
+    <% include app/footer %>
+</body>

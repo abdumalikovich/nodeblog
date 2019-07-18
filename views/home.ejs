@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<body page="home">
+    <% include app/head %>
+    <% include app/header %>
+    
+    <%
+        function trimMe(text, size) {
+            let trimmedString = text.substr(0, size)
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            return trimmedString
+        }
+        
+        function sliceMe(num, size) {
+            let text_str = num.toString()
+            let trimmedString = text_str.slice(4, 11)
+            return trimmedString
+        }
+    %>
+
+    <div class="container container_main">
+        <div class="container container-fluid article_list" id="app">
+            <% if(post.length) { %>
+                <% for(let i = 0; i < post.length; i++) { %>
+                    <article class="post" id="<%= post[i].id %>">
+                        <div class="top image">
+                            <a href="/article/<%= post[i].url %>">
+                                <img src="/<%= post[i].post_image %>" alt="">
+                            </a>
+                        </div>
+                        <div class="bottom description">
+                            <a class="author" href="/author/<%= post[i].post_author %>">
+                                <span class="btn_link"><%= post[i].post_author %></span>
+                            </a>
+                            <div class="title">
+                                <a href="/article/<%= post[i].url %>">
+                                    <p class="title"><%= trimMe(post[i].post_title, 40) %></p>
+                                </a>
+                                <% if(post[i].post_author === user.sessionLogin) { %>
+                                    <a href="/post/edit/<%= post[i].id %>">Edit</a>
+                                    <a style="color: red" class="remove_to_dicks" href="/post/delete/<%= post[i].id %>">Delete</a>
+                                <% } %>
+                            </div>
+                            <div class="text">
+                                <p><%= trimMe(post[i].post_body, 80) %>...</p>
+                            </div>
+                            <div class="date">
+                                <span><%= sliceMe(post[i].createdAt, 5) %></span>
+                            </div>
+                        </div>
+                    </article>
+                <% } %>
+                <div class="pagination">
+                    <% if(current > 1) { %>
+                        <a href="/history/<%= Number(current) -1 %>">Back</a>
+                    <% } %>
+                    <% if(pages > 0 && current < pages) { %>
+                        <a href="/history/<%= Number(current) + 1%>">Next</a>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <h3>No posts yet</h3>
+                <a href="/post/create">Create now</a>
+            <% } %>
+        </div>
+    </div>
+
+    <% include app/footer %>
+</body>

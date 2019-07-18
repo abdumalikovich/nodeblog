@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<body>
+<script src="/dist/js/jquery.js"></script>
+    <% include ../app/head %>
+    <% include ../app/header %>
+    <% if(typeof post !== 'undefined') { %>
+            <script>
+                document.querySelector('body').setAttribute('page', 'edit')
+            </script>
+
+            <% if(user.sessionId && user.sessionLogin) { %>
+                <div class="post_edit container" data-id="<%= post.id %>">
+                    <br>
+                    <h1>EDIT POST</h1>
+                    <form enctype="multipart/form-data" class="form_edit" id="form_edit_post" method="POST" id="">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input name="post_title" type="text" class="form-control input_title" id="post_title" placeholder="Email" value="<%= post.post_title %>">
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label for="newImage">
+                                    <p>Change image of article</p>
+                                    <img data-path="<%= post.post_image %>" src="../../<%= post.post_image %>" alt="" id="image" class="change_image">
+                                </label>
+                                <input type="file" id="newImage" name="newImage" style="display: none">
+                            </div>
+
+                            <div class="form-group">
+                                <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; height: 400px" id="post_body" name="post_body" class="form-control input_title" placeholder="Your article..."><%= post.post_body %></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn_classic btn_classic_green btn_send_data send_post_data">Post</button>
+                    </form>
+                </div>
+            <% } else { %>
+                <h2>Sign in to edit articles</h2>
+            <% } %>
+
+        <% } else { %>
+            <script>
+                document.querySelector('body').setAttribute('page', 'create')
+            </script>
+            <div class="post_create container">
+                <br>
+                <h1>CREATE POST</h1>
+                <form enctype="multipart/form-data" class="form_send" id="form_create_post" method="POST" id="">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="input_image">Choose image of article</label>
+                            <input type="file" id="input_image" class="form-control input_image btn" name="post_image" />
+                        </div>
+                        <div class="form-group">
+                            <label for="post_title">Title</label>
+                            <input name="post_title" type="text" class="form-control input_title" id="post_title" placeholder="Email" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="post_body">Body</label>
+                            <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; height: 400px" id="post_body" name="post_body" class="form-control input_title" placeholder="Your article..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="post_draft">Set if draft</label>
+                            <input name="post_draft" type="checkbox" class="" id="post_draft">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_classic btn_classic_green btn_send_data send_post_data">Post</button>
+                </form>
+            </div>
+        <% } %>
+
+    <% include ../app/footer %>
+</body>
+
+<script>
+    function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (25+o.scrollHeight)+"px";
+    }
+</script>

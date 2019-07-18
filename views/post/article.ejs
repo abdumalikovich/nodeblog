@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<body page="article_item">
+    <% include ../app/head %>
+    <% include ../app/header %>
+
+    <%
+        const trimMe = (text, int) => {
+            let trimmed = (text.trim()).substring(0, int)
+            return trimmed
+        }
+    %>
+
+    <div class="container container_article">
+        <h1 class="title"><%= post.post_title %></h1>
+        <% if(post.post_author === user.sessionLogin) { %>
+            <a href="/post/edit/<%= post.id %>">Edit article</a>
+        <% } %>
+        <hr>
+        <div class="wrapper_author_date">
+            <div class="left">
+                <img src="/static/img/authors/1.png">
+            </div>
+            <div class="right">
+                <div>
+                    <a href="/author/<%= post.post_author %>"><span><%= post.post_author %></span></a>
+                </div>
+                <div>
+                    <span class="data"><%= post.createdAt %></span>
+                    <span class="data">6 min read</span>
+                </div>
+            </div>
+        </div>
+        <figure>
+            <img src="../<%=post.post_image%>" alt="">
+            <figcaption>Photos: Justin Sullivan/Getty Images</figcaption>
+        </figure>
+        <div class="text">
+            <%=post.post_body%>
+        </div>
+        <%# <div class="recommended">
+            <div class="item">
+                <div class="img"></div>
+                <div class="title">Origami for fun…ctionality!</div>
+                <div class="wrapper_author_date">
+                    <div class="left">
+            
+                    </div>
+                    <div class="right">
+                        <div>
+                            <a href="#"><span>qWqs1iBZsumaGP9MR2qYaTE9JHkSy-rT</span></a>
+                        </div>
+                        <div>
+                            <span class="data">Jun 9</span>
+                            <span class="data">6 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="img"></div>
+                <div class="title">Origami for fun…ctionality!</div>
+                <div class="wrapper_author_date">
+                    <div class="left">
+            
+                    </div>
+                    <div class="right">
+                        <div>
+                            <a href="#"><span>qWqs1iBZsumaGP9MR2qYaTE9JHkSy-rT</span></a>
+                        </div>
+                        <div>
+                            <span class="data">Jun 9</span>
+                            <span class="data">6 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="img"></div>
+                <div class="title">Origami for fun…ctionality!</div>
+                <div class="wrapper_author_date">
+                    <div class="left">
+            
+                    </div>
+                    <div class="right">
+                        <div>
+                            <a href="#"><span>qWqs1iBZsumaGP9MR2qYaTE9JHkSy-rT</span></a>
+                        </div>
+                        <div>
+                            <span class="data">Jun 9</span>
+                            <span class="data">6 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> %>
+    </div>
+
+    <%# <div class="comments">
+        <h3>Comments</h3>
+        <div class="write_comment">
+            <span class="link" id="new">Write comment</span>
+            <form class="form_comment" action="" method="POST">
+                <textarea name="comment_text" class="form-control input_comment_text"></textarea>
+                <button onclick="closeF()" type="submit" class="btn_classic btn_classic_green btn_close_form">Close</button>
+                <button type="submit" class="btn_classic btn_classic_green btn_send_data send_comment_data">Comment</button>
+            </form>
+        </div>
+    </div> %>
+
+    <% include ../app/footer %>
+    <script src="/static/js/comment.js"></script>
+</body>

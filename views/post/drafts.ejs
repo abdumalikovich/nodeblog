@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<body page="my_drafts">
+    <% include ../app/head %>
+    <% include ../app/header %>
+    
+    <%
+        function trimMe(text, size) {
+            let text_str = text.toString()
+            let trimmedString = text_str.substr(0, size)
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            return trimmedString
+        }
+        
+        function sliceMe(num, size) {
+            let text_str = num.toString()
+            let trimmedString = text_str.slice(4, 11)
+            return trimmedString
+        }
+    %>
+
+    <div class="container draft_list container_main">
+        <div class="article_list">
+            <% if(posts.length) {
+                posts.forEach((post) => { %>
+                        <article class="post" id="<%= post.id %>">
+                            <div class="top image">
+                                <a href="/article/<%= post.url %>">
+                                    <img src="/<%= post.post_image %>" alt="">
+                                </a>
+                            </div>
+                            <div class="bottom description">
+                                <div class="title">
+                                    <a href="/article/<%= post.url %>">
+                                        <p class="title"><%= trimMe(post.post_title, 40) %></p>
+                                    </a>
+                                    <% if(post.post_author === user.sessionLogin) { %>
+                                        <div class="manage">
+                                            <!-- Be careful, these links are listening by ajax data. Don't write new parents for these links' -->
+                                            <a href="/post/edit/<%= post.id %>">Edit</a>
+                                            <a class="draft_to_dicks" href="/post/delete/<%= post.id %>">Delete</a>
+                                            <a class="draft_to_post" href="/post/delete/<%= post.id %>">Post</a>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="text">
+                                    <p><%= trimMe(post.post_body, 80) %>...</p>
+                                </div>
+                                <div class="date">
+                                    <span><%= sliceMe(post.createdAt, 5) %></span>
+                                </div>
+                            </div>
+                        </article>
+                <% }) %>
+            <% } else { %>
+                <h1>There're no drafts</h1>
+                <hr>
+                <a href="/post/create">Create a post</a>
+            <% } %>
+        </div>
+    </div>
+
+    <% include ../app/footer %>
+</body>

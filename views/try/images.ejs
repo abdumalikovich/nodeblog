@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<body page="<% if(typeof post !== 'undefined') { %>edit<% } else { %>try_images<% } %>">
+    <% include ../app/head %>
+    <% include ../app/header %>
+
+	<div class="container-fluid">
+		<br>
+		<h3>Send data</h3>
+		<hr>
+		<form class="adwswad" method="post" enctype="multipart/form-data" action="/try/images">
+			<input type="text" id="try_name" name="try_name" /> <br>
+			<input type="price" id="try_price" name="try_price" /> <br>
+			<input type="file" id="try_image" name="try_image" /> <br>
+			<button class="btn_classic btn_classic_green btn_send_data send_data">Send</button>
+		</form>
+	</div>
+	
+    <% include ../app/footer %>
+</body>
