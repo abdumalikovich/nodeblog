@@ -4,7 +4,7 @@ const multer = require('multer')
 // const Sharp = require('sharp')
 // const mkdirp = require('mkdirp')
 // const diskStorage = require('../utils/diskStorage')
-const now = require('moment')
+// const now = require('moment')
 
 const router = express.Router()
 const storageFile = multer.diskStorage({

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const base64Img = require('base64-img')
 
 const mConfig = require('./config')
 
